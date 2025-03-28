@@ -19,3 +19,16 @@ class Database:
             self.status = False
            # print(f"Error: {e}")  # Print the error message for debugging
         return self.status
+    
+    def checkUser(self, email, pass1):
+        try:
+            # Using parameterized queries to avoid SQL injection
+            self.cursor.execute("select * from users where email='%s' and password='%s'"%(email, pass1))
+            self.com.commit()  # Commit the transaction
+            self.status = True
+        except Exception as e:
+            # Rollback in case of error
+            self.com.rollback()
+            self.status = False
+           # print(f"Error: {e}")  # Print the error message for debugging
+        return self.status

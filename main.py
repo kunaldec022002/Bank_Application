@@ -33,6 +33,19 @@ def storeUser():
         msg = "Signup Failed"   
     return render_template("message.html",msg=msg)
 
+# action routes pages (checkUser)
+@app.route('/checkUser',methods=['POST','GET'])
+def checkUser():
+  if request.method == 'POST':
+    email1 = request.form['email1']
+    pass1 = request.form['pass1']
+  
+    if db.checkUser(email1,pass1) == True:
+        msg= "Login successful"
+    else:
+        msg = "Login Failed"   
+    return render_template("message.html",msg=msg)
+
 
 
 if __name__ == '__main__':
