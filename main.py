@@ -16,6 +16,34 @@ def index():
 def signup():
   return render_template("signup.html")
 
+@app.route('/userhome')
+def userhome():
+  return render_template("user-home.html")
+
+@app.route('/myaccounts')
+def myaccounts():
+  return render_template("myAccounts.html")
+
+@app.route('/mytransaction')
+def mytransaction():
+  return render_template("myTrasaction.html")
+
+@app.route('/mobile')
+def mobile():
+  return render_template("mobileRecharge.html")
+
+@app.route('/mysetting')
+def mysetting():
+  return render_template("mySetting.html")
+
+@app.route('/mypayments')
+def mypayments():
+  return render_template("myPayments.html")
+
+@app.route('/transfermoney')
+def transfermoney():
+  return render_template("transferMoney.html")
+
 # action routes pages (storeUser)
 @app.route('/storeUser',methods=['POST','GET'])
 def storeUser():
@@ -29,6 +57,7 @@ def storeUser():
     else:
       if db.storeUser(email1,pass1) == True:
         msg= "signup successful"
+        return render_template("index.html")
       else:
         msg = "Signup Failed"   
     return render_template("message.html",msg=msg)
@@ -42,8 +71,9 @@ def checkUser():
   
     if db.checkUser(email1,pass1) == True:
         msg= "Login successful"
+        return render_template("user-home.html")
     else:
-        msg = "Login Failed"   
+        msg = "plese signUp first"  
     return render_template("message.html",msg=msg)
 
 
